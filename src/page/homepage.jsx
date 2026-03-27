@@ -6,7 +6,6 @@ import kios from '../assets/images/kios.png'
 import reactIcon from '../assets/icon/react.png'
 import { FaReact, FaNodeJs, FaPython, FaDocker, FaYoutube } from "react-icons/fa";
 
-// ─── REACT ICONS IMPORTS ──────────────────────────────────────────────────────
 import { FiMonitor, FiSettings, FiDatabase, FiTool, FiGlobe, FiServer, FiLink, FiGitBranch, FiCloud, FiRefreshCw, FiMail, FiMessageCircle, FiGithub, FiCode, FiFigma, FiMenu, FiX } from "react-icons/fi";
 import { SiNextdotjs, SiTypescript, SiPostgresql, SiMongodb, SiRedis, SiPrisma, SiSupabase, SiTailwindcss, SiThreedotjs, SiFastapi, SiExpress } from "react-icons/si";
 import { HiLightningBolt } from "react-icons/hi";
@@ -15,7 +14,6 @@ import { HiLightningBolt } from "react-icons/hi";
 const CYAN = "0,245,255";
 const ORANGE = "255,107,0";
 
-// ─── ICON HELPER ──────────────────────────────────────────────────────────────
 const Icon = ({ Component, size = 20, color = "rgb(0,245,255)" }) => (
   <Component size={size} color={color} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
@@ -132,7 +130,6 @@ const PROJECTS = [
 
 const FILTER_CATS = ["ALL", "Intern Project", "Youtube"];
 
-// ─── SVG DEFAULT THUMBNAIL ────────────────────────────────────────────────────
 function makeDefaultSVG(proj) {
   const c = proj.color;
   const svg = [
@@ -156,7 +153,6 @@ function makeDefaultSVG(proj) {
   return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
 }
 
-// ─── GLOBAL STYLES ────────────────────────────────────────────────────────────
 const G = `
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -290,7 +286,6 @@ body{background:#020408;color:#e0e8f0;font-family:'Rajdhani',sans-serif;overflow
 @media(max-width:480px){.hero-corner{display:none;}}
 `;
 
-// ─── HOOKS ────────────────────────────────────────────────────────────────────
 function useCanvas(ref) {
   useEffect(() => {
     const c = ref.current; if (!c) return;
@@ -312,7 +307,6 @@ function useCanvas(ref) {
 function useCursor() {
   const cr = useRef(null), rr = useRef(null), pos = useRef({ mx: 0, my: 0, rx: 0, ry: 0 });
   useEffect(() => {
-    // Only activate on pointer:fine (desktop/mouse) devices
     if (!window.matchMedia("(pointer: fine)").matches) return;
     function mv(e) { pos.current.mx = e.clientX; pos.current.my = e.clientY; if (cr.current) { cr.current.style.left = e.clientX + "px"; cr.current.style.top = e.clientY + "px"; } }
     document.addEventListener("mousemove", mv);
@@ -332,7 +326,6 @@ function useReveal(ref, delay = 0) {
   }, [ref, delay]);
 }
 
-// ─── STAT ITEM ────────────────────────────────────────────────────────────────
 function StatItem({ target, suffix, label, isLast }) {
   const ref = useRef(null); const [v, setV] = useState("0" + suffix);
   useEffect(() => {
@@ -348,7 +341,6 @@ function StatItem({ target, suffix, label, isLast }) {
   );
 }
 
-// ─── PROJECT CARD ─────────────────────────────────────────────────────────────
 function ProjectCard({ proj, index }) {
   const ref = useRef(null);
   const col = `rgb(${proj.color})`;
@@ -390,7 +382,6 @@ function ProjectCard({ proj, index }) {
   );
 }
 
-// ─── SKILL BADGE ──────────────────────────────────────────────────────────────
 function SkillBadge({ name, iconUrl, baseDelay }) {
   const ref = useRef(null);
   useEffect(() => {
@@ -411,7 +402,6 @@ function SkillBadge({ name, iconUrl, baseDelay }) {
   );
 }
 
-// ─── SKILL CAT ────────────────────────────────────────────────────────────────
 function SkillCat({ cat, iconKey, items, index }) {
   const ref = useRef(null); useReveal(ref, index * 120);
   const catIconFn = ICONS[iconKey];
@@ -443,7 +433,6 @@ function SectionLabel({ tag, title, accent }) {
   );
 }
 
-// ─── MAIN APP ─────────────────────────────────────────────────────────────────
 export default function PoochitPortfolio() {
   const cvs = useRef(null); useCanvas(cvs);
   const { cr, rr, oe, ol } = useCursor();
@@ -459,7 +448,6 @@ export default function PoochitPortfolio() {
     window.addEventListener("scroll", onScroll, { passive: true }); return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -475,7 +463,6 @@ export default function PoochitPortfolio() {
       <style>{G}</style>
       <div className="cur" ref={cr} /><div className="crg" ref={rr} />
 
-      {/* MOBILE MENU */}
       {menuOpen && (
         <div className="mobile-menu">
           <button onClick={() => setMenuOpen(false)} style={{ position: "absolute", top: 20, right: 20, background: "none", border: "none", cursor: "pointer", color: "rgb(0,245,255)", display: "flex" }}>
@@ -490,25 +477,21 @@ export default function PoochitPortfolio() {
         </div>
       )}
 
-      {/* NAV */}
       <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(2,4,8,.9)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(0,245,255,.06)" }} className="nav-wrap">
         <button onClick={() => scrollTo("home")} {...hp} style={{ fontFamily: "'Orbitron',monospace", fontSize: "1.2rem", fontWeight: 900, letterSpacing: ".15em", background: "none", border: "none", cursor: "pointer", color: "rgb(0,245,255)", textShadow: "0 0 20px rgba(0,245,255,.6)" }}>P<span style={{ color: "rgb(255,107,0)" }}>.</span>S</button>
 
-        {/* Desktop nav */}
         <ul style={{ display: "flex", gap: 36, listStyle: "none" }} className="nav-desktop-list">
           {NAV_LINKS.map(l => <li key={l.id} style={{ display: "none" }} className="nav-item-desktop"><button onClick={() => scrollTo(l.id)} className={`nl${activeNav === l.id ? " active" : ""}`} {...hp} style={{ fontFamily: "'Rajdhani',sans-serif", fontWeight: 600, fontSize: ".85rem", letterSpacing: ".2em", textTransform: "uppercase", color: "rgba(255,255,255,.55)", background: "none", border: "none", cursor: "pointer", position: "relative" }}>{l.label}</button></li>)}
         </ul>
 
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <a href="mailto:atom.141101@gmail.com" className="nc hire-btn" {...hp} style={{ fontFamily: "'Orbitron',monospace", fontSize: ".72rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", padding: "9px 22px", border: "1px solid rgb(0,245,255)", color: "rgb(0,245,255)", textDecoration: "none", clipPath: "polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%)", transition: "all .3s", background: "transparent" }}>HIRE ME</a>
-          {/* Hamburger — visible on mobile */}
           <button onClick={() => setMenuOpen(true)} style={{ background: "none", border: "none", cursor: "pointer", color: "rgb(0,245,255)", display: "none", padding: 4 }} className="hamburger-btn">
             {ICONS.menu(24, "rgb(0,245,255)")}
           </button>
         </div>
       </nav>
 
-      {/* Extra style for nav items (CSS-only responsive) */}
       <style>{`
         @media(min-width:769px){
           .nav-item-desktop{display:list-item!important;}
@@ -520,19 +503,16 @@ export default function PoochitPortfolio() {
         }
       `}</style>
 
-      {/* HERO */}
       <section id="home" style={{ position: "relative", width: "100%", height: "100vh", minHeight: 600, overflow: "hidden", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
         <canvas ref={cvs} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 0 }} />
         <div style={{ position: "absolute", inset: 0, zIndex: 1, backgroundImage: "linear-gradient(rgba(0,245,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,.022) 1px,transparent 1px)", backgroundSize: "60px 60px", animation: "gridMove 20s linear infinite" }} />
         <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "radial-gradient(ellipse 80% 60% at 50% 50%,transparent 20%,rgba(2,4,8,.55) 100%),linear-gradient(to bottom,rgba(2,4,8,.3) 0%,transparent 18%,transparent 65%,rgba(2,4,8,.95) 100%)" }} />
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, zIndex: 3, background: "linear-gradient(90deg,transparent,rgb(0,245,255) 50%,transparent)", animation: "scanDown 4s linear infinite" }} />
 
-        {/* Corner decorations */}
         {[{ t: 80, l: 30, style: { borderTop: "2px solid rgb(0,245,255)", borderLeft: "2px solid rgb(0,245,255)" } }, { t: 80, r: 30, style: { borderTop: "2px solid rgb(0,245,255)", borderRight: "2px solid rgb(0,245,255)" } }, { b: 56, l: 30, style: { borderBottom: "2px solid rgb(255,107,0)", borderLeft: "2px solid rgb(255,107,0)" } }, { b: 56, r: 30, style: { borderBottom: "2px solid rgb(255,107,0)", borderRight: "2px solid rgb(255,107,0)" } }].map((d, i) => (
           <div key={i} className="hero-corner" style={{ position: "absolute", top: d.t, bottom: d.b, left: d.l, right: d.r, width: 40, height: 40, zIndex: 10, pointerEvents: "none", ...d.style }} />
         ))}
 
-        {/* Scroll indicator */}
         <div className="scroll-indicator" style={{ position: "absolute", right: 30, top: "50%", transform: "translateY(-50%)", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
           <span style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: ".55rem", letterSpacing: ".35em", textTransform: "uppercase", color: "rgba(0,245,255,.3)", writingMode: "vertical-rl" }}>SCROLL</span>
           <div style={{ width: 1, height: 70, background: "linear-gradient(to bottom,transparent,rgb(0,245,255))", position: "relative", overflow: "hidden" }}>
@@ -557,10 +537,9 @@ export default function PoochitPortfolio() {
             <button onClick={() => scrollTo("contact")} className="bs" {...hp} style={{ fontFamily: "'Orbitron',monospace", fontSize: ".78rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", padding: "13px 34px", border: "1px solid rgba(255,107,0,.6)", color: "rgb(255,107,0)", background: "rgba(255,107,0,.05)", cursor: "pointer", clipPath: "polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%)", transition: "all .3s" }}>ติดต่อ</button>
           </div>
         </div>
-    
+
       </section>
 
-      {/* ABOUT */}
       <section id="about" className="section-pad" style={{ background: "#070d14", position: "relative" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgb(0,245,255),transparent)" }} />
         <SectionLabel tag="// WHO AM I" title="ABOUT" accent="ME" />
@@ -569,7 +548,6 @@ export default function PoochitPortfolio() {
         </div>
       </section>
 
-      {/* SKILLS */}
       <section id="skills" className="section-pad" style={{ background: "#020408", position: "relative" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgb(255,107,0),transparent)" }} />
         <SectionLabel tag="// WHAT I DO" title="MY" accent="SKILLS" />
@@ -578,7 +556,6 @@ export default function PoochitPortfolio() {
         </div>
       </section>
 
-      {/* PROJECTS */}
       <section id="projects" className="section-pad" style={{ background: "#070d14", position: "relative" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgb(0,245,255),transparent)" }} />
         <SectionLabel tag="// WHAT I'VE BUILT" title="MY" accent="PROJECTS" />
@@ -590,13 +567,11 @@ export default function PoochitPortfolio() {
         </div>
       </section>
 
-      {/* CONTACT */}
       <section id="contact" className="section-pad" style={{ background: "#020408", position: "relative" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgb(255,107,0),transparent)" }} />
         <ContactSection hp={hp} />
       </section>
 
-      {/* FOOTER */}
       <footer className="footer-wrap" style={{ background: "#020408", borderTop: "1px solid rgba(0,245,255,.06)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap" }}>
         <button onClick={() => scrollTo("home")} {...hp} style={{ fontFamily: "'Orbitron',monospace", fontSize: "1.1rem", fontWeight: 900, letterSpacing: ".15em", background: "none", border: "none", cursor: "pointer", color: "rgb(0,245,255)", textShadow: "0 0 20px rgba(0,245,255,.6)" }}>P<span style={{ color: "rgb(255,107,0)" }}>.</span>S</button>
         <span style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: ".65rem", letterSpacing: ".15em", color: "rgba(200,220,240,.18)", display: "inline-flex", alignItems: "center", gap: 4 }}>© 2025 POOCHIT SAKUNTHONG · BUILT WITH {ICONS.bolt(12, "rgba(200,220,240,.18)")}</span>
@@ -605,7 +580,6 @@ export default function PoochitPortfolio() {
   );
 }
 
-// ─── ABOUT AVATAR ─────────────────────────────────────────────────────────────
 function AboutAvatar() {
   const ref = useRef(null); useReveal(ref, 0);
   return (
@@ -627,7 +601,6 @@ function AboutAvatar() {
   );
 }
 
-// ─── ABOUT BIO ────────────────────────────────────────────────────────────────
 function AboutBio({ hp, scrollTo }) {
   const ref = useRef(null);
   useReveal(ref, 150);
@@ -667,7 +640,6 @@ function AboutBio({ hp, scrollTo }) {
   );
 }
 
-// ─── CONTACT ──────────────────────────────────────────────────────────────────
 function ContactSection({ hp }) {
   const ref = useRef(null); useReveal(ref);
   const [form, setForm] = useState({ name: "", email: "", msg: "" });
