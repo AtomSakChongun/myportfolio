@@ -7,7 +7,7 @@ import reactIcon from '../assets/icon/react.png'
 import { FaReact, FaNodeJs, FaPython, FaDocker, FaYoutube } from "react-icons/fa";
 
 // ─── REACT ICONS IMPORTS ──────────────────────────────────────────────────────
-import { FiMonitor, FiSettings, FiDatabase, FiTool, FiGlobe, FiServer, FiLink, FiGitBranch, FiCloud, FiRefreshCw, FiMail, FiMessageCircle, FiGithub, FiCode, FiFigma } from "react-icons/fi";
+import { FiMonitor, FiSettings, FiDatabase, FiTool, FiGlobe, FiServer, FiLink, FiGitBranch, FiCloud, FiRefreshCw, FiMail, FiMessageCircle, FiGithub, FiCode, FiFigma, FiMenu, FiX } from "react-icons/fi";
 import { SiNextdotjs, SiTypescript, SiPostgresql, SiMongodb, SiRedis, SiPrisma, SiSupabase, SiTailwindcss, SiThreedotjs, SiFastapi, SiExpress } from "react-icons/si";
 import { HiLightningBolt } from "react-icons/hi";
 
@@ -52,6 +52,8 @@ const ICONS = {
   code: (s = 20, c = "rgb(0,245,255)") => <Icon Component={FiCode} size={s} color={c} />,
   user: (s = 60, c = "rgb(0,245,255)") => <Icon Component={FiCode} size={s} color={c} />,
   youtube: (s = 20, c = "rgb(0,245,255)") => <Icon Component={FaYoutube} size={s} color={c} />,
+  menu: (s = 20, c = "rgb(0,245,255)") => <Icon Component={FiMenu} size={s} color={c} />,
+  close: (s = 20, c = "rgb(0,245,255)") => <Icon Component={FiX} size={s} color={c} />,
 };
 
 const NAV_LINKS = [
@@ -60,13 +62,6 @@ const NAV_LINKS = [
   { label: "Skills", id: "skills" },
   { label: "Projects", id: "projects" },
   { label: "Contact", id: "contact" },
-];
-
-const STATS = [
-  { target: 3, suffix: "+", label: "Years Exp." },
-  { target: 24, suffix: "", label: "Projects Done" },
-  { target: 99, suffix: "%", label: "Passion" },
-  { target: 12, suffix: "", label: "Happy Clients" },
 ];
 
 const SKILLS = [
@@ -103,7 +98,7 @@ const SKILLS = [
     items: [
       { name: "PostgreSQL", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
       { name: "MySQL", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-      { name: "Firebse", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+      { name: "Firebase", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
       { name: "MongoDB", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
     ],
   },
@@ -154,17 +149,8 @@ function makeDefaultSVG(proj) {
     '<rect width="640" height="200" fill="#060c12"/>',
     `<rect width="640" height="200" fill="url(#rbg${proj.id})"/>`,
     `<rect width="640" height="200" fill="url(#grd${proj.id})"/>`,
-    `<line x1="-30" y1="200" x2="230" y2="-30" stroke="rgb(${c})" stroke-width="0.6" stroke-opacity="0.1"/>`,
-    `<line x1="120" y1="200" x2="380" y2="-30" stroke="rgb(${c})" stroke-width="0.6" stroke-opacity="0.07"/>`,
-    `<line x1="280" y1="200" x2="540" y2="-30" stroke="rgb(${c})" stroke-width="0.6" stroke-opacity="0.05"/>`,
-    `<polyline points="16,34 16,16 34,16" fill="none" stroke="rgb(${c})" stroke-width="1.8" stroke-opacity="0.7"/>`,
-    `<polyline points="624,34 624,16 606,16" fill="none" stroke="rgb(${c})" stroke-width="1.8" stroke-opacity="0.7"/>`,
-    `<polyline points="16,166 16,184 34,184" fill="none" stroke="rgb(${c})" stroke-width="1.8" stroke-opacity="0.35"/>`,
-    `<polyline points="624,166 624,184 606,184" fill="none" stroke="rgb(${c})" stroke-width="1.8" stroke-opacity="0.35"/>`,
-    `<text x="320" y="115" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="120" font-weight="900" fill="rgb(${c})" fill-opacity="0.055" letter-spacing="-6">${proj.id}</text>`,
     `<text x="320" y="84" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="21" font-weight="700" fill="rgb(${c})" fill-opacity="0.9" letter-spacing="3">${proj.title}</text>`,
     `<text x="320" y="116" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="9.5" fill="rgb(${c})" fill-opacity="0.4" letter-spacing="3.5">${proj.category.toUpperCase()}</text>`,
-    `<rect x="0" y="100" width="640" height="1" fill="rgb(${c})" fill-opacity="0.055"/>`,
     '</svg>'
   ].join('');
   return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
@@ -175,7 +161,8 @@ const G = `
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:#020408;color:#e0e8f0;font-family:'Rajdhani',sans-serif;overflow-x:hidden;cursor:none;}
+body{background:#020408;color:#e0e8f0;font-family:'Rajdhani',sans-serif;overflow-x:hidden;}
+@media(pointer:fine){body{cursor:none;}}
 @keyframes gridMove{from{background-position:0 0}to{background-position:60px 60px}}
 @keyframes scanDown{0%{top:-2px;opacity:0}5%{opacity:.5}95%{opacity:.5}100%{top:100%;opacity:0}}
 @keyframes hR{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
@@ -184,6 +171,7 @@ body{background:#020408;color:#e0e8f0;font-family:'Rajdhani',sans-serif;overflow
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes skillPop{0%{opacity:0;transform:scale(0.5) translateY(10px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes g1{0%,89%,100%{clip-path:inset(0 0 100% 0);transform:translate(0)}90%{clip-path:inset(20% 0 60% 0);transform:translate(-3px,0)}93%{clip-path:inset(55% 0 20% 0);transform:translate(3px,0)}96%{clip-path:inset(75% 0 5% 0);transform:translate(-2px,0)}}
 @keyframes g2{0%,91%,100%{clip-path:inset(0 0 100% 0);transform:translate(0)}92%{clip-path:inset(40% 0 40% 0);transform:translate(2px,0)}95%{clip-path:inset(10% 0 70% 0);transform:translate(-2px,0)}98%{clip-path:inset(65% 0 10% 0);transform:translate(1px,0)}}
 .gw{position:relative;display:inline-block;}
@@ -214,20 +202,92 @@ body{background:#020408;color:#e0e8f0;font-family:'Rajdhani',sans-serif;overflow
 .filter-btn{font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;padding:7px 16px;border:1px solid rgba(0,245,255,.2);color:rgba(200,220,240,.45);background:transparent;cursor:pointer;transition:all .25s;clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%);}
 .filter-btn:hover{border-color:rgba(0,245,255,.5);color:rgb(0,245,255);}
 .filter-btn.active{border-color:rgb(0,245,255);color:rgb(0,245,255);background:rgba(0,245,255,.08);}
-.cur{position:fixed;width:12px;height:12px;background:rgb(0,245,255);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 20px rgba(0,245,255,.6),0 0 60px rgba(0,245,255,.3);transition:width .2s,height .2s;}
-.crg{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,245,255,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;}
+@media(pointer:fine){
+  .cur{position:fixed;width:12px;height:12px;background:rgb(0,245,255);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 20px rgba(0,245,255,.6),0 0 60px rgba(0,245,255,.3);transition:width .2s,height .2s;}
+  .crg{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,245,255,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;}
+}
 .inp{width:100%;background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.15);color:#e0e8f0;font-family:'Rajdhani',sans-serif;font-size:1rem;padding:14px 18px;outline:none;transition:border-color .3s;}
 .inp:focus{border-color:rgba(0,245,255,.5);}
 .inp::placeholder{color:rgba(200,220,240,.3);}
 .sec-in{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
 .sec-in.vis{opacity:1;transform:translateY(0);}
-@media(max-width:768px){
-  nav .nav-desktop{display:none!important;}
-  .hero-stats-bar{flex-wrap:wrap;}
-  .hero-stats-bar>div{min-width:50%;border-right:none!important;border-bottom:1px solid rgba(0,245,255,.08);}
-  .skills-grid,.projects-grid,.about-grid{grid-template-columns:1fr!important;}
-  footer{flex-direction:column;align-items:center;text-align:center;}
+
+/* ─── MOBILE MENU ─────────────────────────────────────────────── */
+.mobile-menu{position:fixed;inset:0;background:rgba(2,4,8,.97);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;animation:slideDown .3s ease;}
+.mobile-menu-link{font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);background:none;border:none;cursor:pointer;transition:color .25s;position:relative;}
+.mobile-menu-link::after{content:'';position:absolute;bottom:-6px;left:0;right:0;height:1px;background:rgb(0,245,255);transform:scaleX(0);transition:transform .3s;}
+.mobile-menu-link:hover,.mobile-menu-link.active{color:rgb(0,245,255);}
+.mobile-menu-link.active::after,.mobile-menu-link:hover::after{transform:scaleX(1);}
+
+/* ─── RESPONSIVE ──────────────────────────────────────────────── */
+/* Padding scale */
+.section-pad{padding:120px 60px;}
+@media(max-width:1024px){.section-pad{padding:100px 40px;}}
+@media(max-width:768px){.section-pad{padding:80px 20px;}}
+@media(max-width:480px){.section-pad{padding:70px 16px;}}
+
+/* Nav padding */
+.nav-wrap{padding:18px 60px;}
+@media(max-width:768px){.nav-wrap{padding:14px 20px;}}
+
+/* Footer */
+.footer-wrap{padding:32px 60px;}
+@media(max-width:768px){.footer-wrap{padding:24px 20px;flex-direction:column;align-items:center;text-align:center;gap:12px;}}
+
+/* Hero buttons */
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+@media(max-width:480px){.hero-btns{flex-direction:column;align-items:center;width:100%;max-width:280px;margin:0 auto;}}
+@media(max-width:480px){.hero-btns button,.hero-btns a{width:100%;justify-content:center;}}
+
+/* Stats bar */
+.stats-bar{display:flex;flex-wrap:wrap;border:1px solid rgba(0,245,255,.08);}
+.stat-item{flex:1;min-width:130px;padding:18px 24px;text-align:center;border-right:1px solid rgba(0,245,255,.08);}
+.stat-item:last-child{border-right:none;}
+@media(max-width:600px){
+  .stat-item{min-width:50%;border-right:none;border-bottom:1px solid rgba(0,245,255,.08);}
+  .stat-item:nth-child(odd){border-right:1px solid rgba(0,245,255,.08);}
+  .stat-item:nth-last-child(-n+2){border-bottom:none;}
 }
+
+/* About grid */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:40px;}}
+
+/* Skills grid */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;}
+@media(max-width:600px){.skills-grid{grid-template-columns:1fr;}}
+
+/* Projects grid */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2px;}
+@media(max-width:700px){.projects-grid{grid-template-columns:1fr;}}
+
+/* Contact grid */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:40px;}}
+
+/* About info grid */
+.about-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 32px;}
+@media(max-width:400px){.about-info-grid{grid-template-columns:1fr;}}
+
+/* About avatar size */
+.about-avatar-wrap{position:relative;width:300px;height:300px;}
+@media(max-width:480px){.about-avatar-wrap{width:220px;height:220px;}}
+
+/* Hero text size adjustments */
+@media(max-width:480px){
+  .hero-badge{padding:5px 12px;font-size:.6rem;}
+  .hero-name{font-size:clamp(2rem,12vw,4rem)!important;}
+}
+
+/* Section header */
+.section-tag{font-family:'Share Tech Mono',monospace;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:rgb(0,245,255);margin-bottom:10px;opacity:.8;}
+@media(max-width:480px){.section-tag{font-size:.62rem;letter-spacing:.2em;}}
+
+/* Hide scroll indicator on mobile */
+@media(max-width:768px){.scroll-indicator{display:none;}}
+
+/* Corner decorations on mobile */
+@media(max-width:480px){.hero-corner{display:none;}}
 `;
 
 // ─── HOOKS ────────────────────────────────────────────────────────────────────
@@ -252,6 +312,8 @@ function useCanvas(ref) {
 function useCursor() {
   const cr = useRef(null), rr = useRef(null), pos = useRef({ mx: 0, my: 0, rx: 0, ry: 0 });
   useEffect(() => {
+    // Only activate on pointer:fine (desktop/mouse) devices
+    if (!window.matchMedia("(pointer: fine)").matches) return;
     function mv(e) { pos.current.mx = e.clientX; pos.current.my = e.clientY; if (cr.current) { cr.current.style.left = e.clientX + "px"; cr.current.style.top = e.clientY + "px"; } }
     document.addEventListener("mousemove", mv);
     let raf; (function loop() { const p = pos.current; p.rx += (p.mx - p.rx) * .12; p.ry += (p.my - p.ry) * .12; if (rr.current) { rr.current.style.left = p.rx + "px"; rr.current.style.top = p.ry + "px"; } raf = requestAnimationFrame(loop); })();
@@ -279,7 +341,7 @@ function StatItem({ target, suffix, label, isLast }) {
     io.observe(el); return () => io.disconnect();
   }, [target, suffix]);
   return (
-    <div ref={ref} style={{ flex: 1, minWidth: 120, padding: "18px 24px", textAlign: "center", borderRight: isLast ? "none" : "1px solid rgba(0,245,255,0.08)" }}>
+    <div ref={ref} className="stat-item">
       <span style={{ fontFamily: "'Orbitron',monospace", fontSize: "1.9rem", fontWeight: 900, color: "rgb(0,245,255)", textShadow: "0 0 20px rgba(0,245,255,.6)", display: "block", lineHeight: 1 }}>{v}</span>
       <span style={{ fontSize: ".7rem", letterSpacing: ".2em", textTransform: "uppercase", color: "rgba(200,220,240,.35)", display: "block", marginTop: 5 }}>{label}</span>
     </div>
@@ -301,7 +363,7 @@ function ProjectCard({ proj, index }) {
   const statusColor = proj.status === "LIVE" ? "rgb(0,245,255)" : proj.status === "BETA" ? "rgb(255,200,0)" : proj.status === "OPEN SOURCE" ? "rgb(100,255,120)" : "rgba(200,220,240,.3)";
 
   return (
-    <a href={proj.link} target="_blank" ref={ref} className="pc" style={{ background: "rgba(7,13,20,.8)", border: `1px solid rgba(${proj.color},.12)`, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column" }}>
+    <a href={proj.link} target="_blank" ref={ref} className="pc" style={{ background: "rgba(7,13,20,.8)", border: `1px solid rgba(${proj.color},.12)`, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", textDecoration: "none" }}>
       <div style={{ height: 2, background: `linear-gradient(90deg,${col},transparent)` }} />
       <div style={{ height: 200, position: "relative", overflow: "hidden", flexShrink: 0 }}>
         <img className="pc-img" src={displayImg} alt={proj.title} />
@@ -311,7 +373,7 @@ function ProjectCard({ proj, index }) {
               <span key={t} style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: ".6rem", letterSpacing: ".1em", padding: "2px 8px", border: `1px solid rgba(${proj.color},.4)`, color: col }}>{t}</span>
             ))}
           </div>
-          <a href={proj.link} style={{ fontFamily: "'Orbitron',monospace", fontSize: ".68rem", fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: col, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}>VIEW PROJECT →</a>
+          <span style={{ fontFamily: "'Orbitron',monospace", fontSize: ".68rem", fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: col, display: "inline-flex", alignItems: "center", gap: 6 }}>VIEW PROJECT →</span>
         </div>
       </div>
       <div style={{ padding: "24px 24px 28px", flex: 1, display: "flex", flexDirection: "column", gap: 10 }}>
@@ -331,42 +393,20 @@ function ProjectCard({ proj, index }) {
 // ─── SKILL BADGE ──────────────────────────────────────────────────────────────
 function SkillBadge({ name, iconUrl, baseDelay }) {
   const ref = useRef(null);
-
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
-      setTimeout(() => el.classList.add("go"), baseDelay);
-      io.disconnect();
-    }, { threshold: 0.3 });
-
-    io.observe(el);
-    return () => io.disconnect();
+    const el = ref.current; if (!el) return;
+    const io = new IntersectionObserver(([e]) => { if (!e.isIntersecting) return; setTimeout(() => el.classList.add("go"), baseDelay); io.disconnect(); }, { threshold: 0.3 });
+    io.observe(el); return () => io.disconnect();
   }, [baseDelay]);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
       <div ref={ref} className="sk-badge">
-        <div
-          style={{
-            width: 52,
-            height: 52,
-            border: "1px solid rgba(0,245,255,.18)",
-            background: "rgba(0,245,255,.04)",
-            borderRadius: 8,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        <div style={{ width: 52, height: 52, border: "1px solid rgba(0,245,255,.18)", background: "rgba(0,245,255,.04)", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center" }}>
           <img src={iconUrl} alt={name} style={{ width: 22, height: 22 }} />
         </div>
       </div>
-      <span style={{ fontSize: ".58rem", color: "rgba(200,220,240,.45)" }}>
-        {name}
-      </span>
+      <span style={{ fontSize: ".58rem", color: "rgba(200,220,240,.45)" }}>{name}</span>
     </div>
   );
 }
@@ -383,14 +423,8 @@ function SkillCat({ cat, iconKey, items, index }) {
         <span style={{ fontFamily: "'Orbitron',monospace", fontSize: ".8rem", fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "rgb(0,245,255)" }}>{cat}</span>
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
-        {/* ✅ แก้ตรงนี้: ส่ง iconUrl แทน iconKey */}
         {items.map((item, i) => (
-          <SkillBadge
-            key={item.name}
-            name={item.name}
-            iconUrl={item.iconUrl}
-            baseDelay={(index * 120) + (i * 70)}
-          />
+          <SkillBadge key={item.name} name={item.name} iconUrl={item.iconUrl} baseDelay={(index * 120) + (i * 70)} />
         ))}
       </div>
     </div>
@@ -401,8 +435,8 @@ function SectionLabel({ tag, title, accent }) {
   const ref = useRef(null); useReveal(ref);
   return (
     <div ref={ref} className="sec-in" style={{ marginBottom: 60 }}>
-      <div style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: ".72rem", letterSpacing: ".3em", textTransform: "uppercase", color: "rgb(0,245,255)", marginBottom: 10, opacity: .8 }}>{tag}</div>
-      <h2 style={{ fontFamily: "'Orbitron',monospace", fontSize: "clamp(1.8rem,4vw,2.8rem)", fontWeight: 900, textTransform: "uppercase", color: "#fff", letterSpacing: ".04em" }}>
+      <div className="section-tag">{tag}</div>
+      <h2 style={{ fontFamily: "'Orbitron',monospace", fontSize: "clamp(1.6rem,4vw,2.8rem)", fontWeight: 900, textTransform: "uppercase", color: "#fff", letterSpacing: ".04em" }}>
         {title} <span style={{ color: "rgb(255,107,0)" }}>{accent}</span>
       </h2>
     </div>
@@ -416,100 +450,155 @@ export default function PoochitPortfolio() {
   const hp = { onMouseEnter: oe, onMouseLeave: ol };
   const [activeFilter, setActiveFilter] = useState("ALL");
   const [activeNav, setActiveNav] = useState("home");
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const filteredProjects = activeFilter === "ALL" ? PROJECTS : PROJECTS.filter(p => p.category === activeFilter);
+
   useEffect(() => {
     function onScroll() { const sections = ["home", "about", "skills", "projects", "contact"]; for (let i = sections.length - 1; i >= 0; i--) { const el = document.getElementById(sections[i]); if (el && window.scrollY >= el.offsetTop - 120) { setActiveNav(sections[i]); break; } } }
     window.addEventListener("scroll", onScroll, { passive: true }); return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  function scrollTo(id) { document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }); }
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  function scrollTo(id) {
+    setMenuOpen(false);
+    setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), menuOpen ? 200 : 0);
+  }
 
   return (
     <>
       <style>{G}</style>
       <div className="cur" ref={cr} /><div className="crg" ref={rr} />
 
+      {/* MOBILE MENU */}
+      {menuOpen && (
+        <div className="mobile-menu">
+          <button onClick={() => setMenuOpen(false)} style={{ position: "absolute", top: 20, right: 20, background: "none", border: "none", cursor: "pointer", color: "rgb(0,245,255)", display: "flex" }}>
+            {ICONS.close(28, "rgb(0,245,255)")}
+          </button>
+          {NAV_LINKS.map(l => (
+            <button key={l.id} className={`mobile-menu-link${activeNav === l.id ? " active" : ""}`} onClick={() => scrollTo(l.id)}>
+              {l.label}
+            </button>
+          ))}
+          <a href="mailto:atom.141101@gmail.com" style={{ fontFamily: "'Orbitron',monospace", fontSize: ".9rem", fontWeight: 700, letterSpacing: ".15em", padding: "12px 28px", border: "1px solid rgb(0,245,255)", color: "rgb(0,245,255)", textDecoration: "none", clipPath: "polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%)", marginTop: 8 }}>HIRE ME</a>
+        </div>
+      )}
+
       {/* NAV */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "18px 60px", background: "rgba(2,4,8,.9)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(0,245,255,.06)" }}>
-        <button onClick={() => scrollTo("home")} {...hp} style={{ fontFamily: "'Orbitron',monospace", fontSize: "1.2rem", fontWeight: 900, letterSpacing: ".15em", background: "none", border: "none", cursor: "none", color: "rgb(0,245,255)", textShadow: "0 0 20px rgba(0,245,255,.6)" }}>P<span style={{ color: "rgb(255,107,0)" }}>.</span>S</button>
-        <ul className="nav-desktop" style={{ display: "flex", gap: 36, listStyle: "none" }}>
-          {NAV_LINKS.map(l => <li key={l.id}><button onClick={() => scrollTo(l.id)} className={`nl${activeNav === l.id ? " active" : ""}`} {...hp} style={{ fontFamily: "'Rajdhani',sans-serif", fontWeight: 600, fontSize: ".85rem", letterSpacing: ".2em", textTransform: "uppercase", color: "rgba(255,255,255,.55)", background: "none", border: "none", cursor: "none", position: "relative" }}>{l.label}</button></li>)}
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(2,4,8,.9)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(0,245,255,.06)" }} className="nav-wrap">
+        <button onClick={() => scrollTo("home")} {...hp} style={{ fontFamily: "'Orbitron',monospace", fontSize: "1.2rem", fontWeight: 900, letterSpacing: ".15em", background: "none", border: "none", cursor: "pointer", color: "rgb(0,245,255)", textShadow: "0 0 20px rgba(0,245,255,.6)" }}>P<span style={{ color: "rgb(255,107,0)" }}>.</span>S</button>
+
+        {/* Desktop nav */}
+        <ul style={{ display: "flex", gap: 36, listStyle: "none" }} className="nav-desktop-list">
+          {NAV_LINKS.map(l => <li key={l.id} style={{ display: "none" }} className="nav-item-desktop"><button onClick={() => scrollTo(l.id)} className={`nl${activeNav === l.id ? " active" : ""}`} {...hp} style={{ fontFamily: "'Rajdhani',sans-serif", fontWeight: 600, fontSize: ".85rem", letterSpacing: ".2em", textTransform: "uppercase", color: "rgba(255,255,255,.55)", background: "none", border: "none", cursor: "pointer", position: "relative" }}>{l.label}</button></li>)}
         </ul>
-        <a href="mailto:atom.141101@gmail.com" className="nc" {...hp} style={{ fontFamily: "'Orbitron',monospace", fontSize: ".72rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", padding: "9px 22px", border: "1px solid rgb(0,245,255)", color: "rgb(0,245,255)", textDecoration: "none", clipPath: "polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%)", transition: "all .3s", background: "transparent" }}>HIRE ME</a>
+
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <a href="mailto:atom.141101@gmail.com" className="nc hire-btn" {...hp} style={{ fontFamily: "'Orbitron',monospace", fontSize: ".72rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", padding: "9px 22px", border: "1px solid rgb(0,245,255)", color: "rgb(0,245,255)", textDecoration: "none", clipPath: "polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%)", transition: "all .3s", background: "transparent" }}>HIRE ME</a>
+          {/* Hamburger — visible on mobile */}
+          <button onClick={() => setMenuOpen(true)} style={{ background: "none", border: "none", cursor: "pointer", color: "rgb(0,245,255)", display: "none", padding: 4 }} className="hamburger-btn">
+            {ICONS.menu(24, "rgb(0,245,255)")}
+          </button>
+        </div>
       </nav>
 
+      {/* Extra style for nav items (CSS-only responsive) */}
+      <style>{`
+        @media(min-width:769px){
+          .nav-item-desktop{display:list-item!important;}
+          .hamburger-btn{display:none!important;}
+        }
+        @media(max-width:768px){
+          .hire-btn{display:none!important;}
+          .hamburger-btn{display:flex!important;}
+        }
+      `}</style>
+
       {/* HERO */}
-      <section id="home" style={{ position: "relative", width: "100%", height: "100vh", minHeight: 700, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <section id="home" style={{ position: "relative", width: "100%", height: "100vh", minHeight: 600, overflow: "hidden", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
         <canvas ref={cvs} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 0 }} />
         <div style={{ position: "absolute", inset: 0, zIndex: 1, backgroundImage: "linear-gradient(rgba(0,245,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,.022) 1px,transparent 1px)", backgroundSize: "60px 60px", animation: "gridMove 20s linear infinite" }} />
         <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "radial-gradient(ellipse 80% 60% at 50% 50%,transparent 20%,rgba(2,4,8,.55) 100%),linear-gradient(to bottom,rgba(2,4,8,.3) 0%,transparent 18%,transparent 65%,rgba(2,4,8,.95) 100%)" }} />
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, zIndex: 3, background: "linear-gradient(90deg,transparent,rgb(0,245,255) 50%,transparent)", animation: "scanDown 4s linear infinite" }} />
+
+        {/* Corner decorations */}
         {[{ t: 80, l: 30, style: { borderTop: "2px solid rgb(0,245,255)", borderLeft: "2px solid rgb(0,245,255)" } }, { t: 80, r: 30, style: { borderTop: "2px solid rgb(0,245,255)", borderRight: "2px solid rgb(0,245,255)" } }, { b: 56, l: 30, style: { borderBottom: "2px solid rgb(255,107,0)", borderLeft: "2px solid rgb(255,107,0)" } }, { b: 56, r: 30, style: { borderBottom: "2px solid rgb(255,107,0)", borderRight: "2px solid rgb(255,107,0)" } }].map((d, i) => (
-          <div key={i} style={{ position: "absolute", top: d.t, bottom: d.b, left: d.l, right: d.r, width: 40, height: 40, zIndex: 10, pointerEvents: "none", ...d.style }} />
+          <div key={i} className="hero-corner" style={{ position: "absolute", top: d.t, bottom: d.b, left: d.l, right: d.r, width: 40, height: 40, zIndex: 10, pointerEvents: "none", ...d.style }} />
         ))}
-        <div style={{ position: "absolute", right: 30, top: "50%", transform: "translateY(-50%)", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+
+        {/* Scroll indicator */}
+        <div className="scroll-indicator" style={{ position: "absolute", right: 30, top: "50%", transform: "translateY(-50%)", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
           <span style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: ".55rem", letterSpacing: ".35em", textTransform: "uppercase", color: "rgba(0,245,255,.3)", writingMode: "vertical-rl" }}>SCROLL</span>
           <div style={{ width: 1, height: 70, background: "linear-gradient(to bottom,transparent,rgb(0,245,255))", position: "relative", overflow: "hidden" }}>
             <div style={{ position: "absolute", top: "-100%", left: 0, width: "100%", height: "100%", background: "rgb(0,245,255)", animation: "scrollDown 2s ease-in-out infinite" }} />
           </div>
         </div>
-        <div style={{ position: "relative", zIndex: 10, textAlign: "center", maxWidth: 900, padding: "0 40px" }}>
-          <div className="hb" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "'Share Tech Mono',monospace", fontSize: ".72rem", letterSpacing: ".3em", textTransform: "uppercase", color: "rgb(0,245,255)", border: "1px solid rgba(0,245,255,.35)", padding: "6px 16px", marginBottom: 28, background: "rgba(0,245,255,.04)", clipPath: "polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)" }}>
+
+        <div style={{ position: "relative", zIndex: 10, textAlign: "center", maxWidth: 900, padding: "0 20px", width: "100%" }}>
+          <div className="hb hero-badge" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "'Share Tech Mono',monospace", fontSize: ".72rem", letterSpacing: ".3em", textTransform: "uppercase", color: "rgb(0,245,255)", border: "1px solid rgba(0,245,255,.35)", padding: "6px 16px", marginBottom: 28, background: "rgba(0,245,255,.04)", clipPath: "polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)" }}>
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "rgb(0,245,255)", boxShadow: "0 0 8px rgb(0,245,255)", animation: "blink 1.5s ease-in-out infinite", flexShrink: 0 }} />
-            FULL-STACK DEVELOPER · OPEN TO WORK
+            <span style={{ fontSize: "clamp(.55rem,.72rem + .1vw,.72rem)" }}>FULL-STACK DEVELOPER · OPEN TO WORK</span>
           </div>
-          <h1 className="ht" style={{ fontFamily: "'Orbitron',monospace", fontSize: "clamp(2.6rem,7.5vw,6rem)", fontWeight: 900, lineHeight: .92, letterSpacing: "-.02em", textTransform: "uppercase", marginBottom: 24 }}>
-            <span style={{ display: "block", color: "#fff", textShadow: "0 0 60px rgba(255,255,255,.2)", fontSize: "clamp(1.4rem,3.5vw,2.8rem)", letterSpacing: ".05em", fontWeight: 400, marginBottom: 6 }}>Hello, I'm</span>
-            <span style={{ display: "block", color: "#fff", textShadow: "0 0 60px rgba(255,255,255,.25)" }}>Poochit Sakunthong</span>
-            <span style={{ display: "block", background: "linear-gradient(90deg,rgb(0,245,255) 0%,rgb(64,224,255) 40%,rgb(255,107,0) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", filter: "drop-shadow(0 0 25px rgba(0,245,255,.5))" }}>
+          <h1 className="ht" style={{ fontFamily: "'Orbitron',monospace", fontWeight: 900, lineHeight: .92, letterSpacing: "-.02em", textTransform: "uppercase", marginBottom: 24 }}>
+            <span style={{ display: "block", color: "#fff", textShadow: "0 0 60px rgba(255,255,255,.2)", fontSize: "clamp(1.1rem,3.5vw,2.8rem)", letterSpacing: ".05em", fontWeight: 400, marginBottom: 6 }}>Hello, I'm</span>
+            <span className="hero-name" style={{ display: "block", color: "#fff", textShadow: "0 0 60px rgba(255,255,255,.25)", fontSize: "clamp(2rem,7.5vw,6rem)" }}>Poochit Sakunthong</span>
+            <span style={{ display: "block", background: "linear-gradient(90deg,rgb(0,245,255) 0%,rgb(64,224,255) 40%,rgb(255,107,0) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", filter: "drop-shadow(0 0 25px rgba(0,245,255,.5))", fontSize: "clamp(2rem,7.5vw,6rem)" }}>
               <span className="gw" data-text="Poochit Sakunthong">Poochit Sakunthong</span>
             </span>
           </h1>
-          <div className="ha" style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-            <button onClick={() => scrollTo("projects")} className="bp" {...hp} style={{ position: "relative", fontFamily: "'Orbitron',monospace", fontSize: ".78rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", padding: "15px 38px", background: "linear-gradient(135deg,rgb(0,245,255),rgb(0,144,255))", color: "#020408", border: "none", cursor: "none", clipPath: "polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%)", transition: "all .3s", overflow: "hidden", display: "inline-flex", alignItems: "center", gap: 8 }}>{ICONS.bolt(14, "#020408")} ดูผลงาน</button>
-            <button onClick={() => scrollTo("contact")} className="bs" {...hp} style={{ fontFamily: "'Orbitron',monospace", fontSize: ".78rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", padding: "13px 34px", border: "1px solid rgba(255,107,0,.6)", color: "rgb(255,107,0)", background: "rgba(255,107,0,.05)", cursor: "none", clipPath: "polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%)", transition: "all .3s" }}>ติดต่อ</button>
+          <div className="ha hero-btns">
+            <button onClick={() => scrollTo("projects")} className="bp" {...hp} style={{ position: "relative", fontFamily: "'Orbitron',monospace", fontSize: ".78rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", padding: "15px 38px", background: "linear-gradient(135deg,rgb(0,245,255),rgb(0,144,255))", color: "#020408", border: "none", cursor: "pointer", clipPath: "polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%)", transition: "all .3s", overflow: "hidden", display: "inline-flex", alignItems: "center", gap: 8 }}>{ICONS.bolt(14, "#020408")} ดูผลงาน</button>
+            <button onClick={() => scrollTo("contact")} className="bs" {...hp} style={{ fontFamily: "'Orbitron',monospace", fontSize: ".78rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", padding: "13px 34px", border: "1px solid rgba(255,107,0,.6)", color: "rgb(255,107,0)", background: "rgba(255,107,0,.05)", cursor: "pointer", clipPath: "polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%)", transition: "all .3s" }}>ติดต่อ</button>
           </div>
         </div>
+    
       </section>
 
       {/* ABOUT */}
-      <section id="about" style={{ padding: "120px 60px", background: "#070d14", position: "relative" }}>
+      <section id="about" className="section-pad" style={{ background: "#070d14", position: "relative" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgb(0,245,255),transparent)" }} />
         <SectionLabel tag="// WHO AM I" title="ABOUT" accent="ME" />
-        <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
+        <div className="about-grid">
           <AboutAvatar /><AboutBio hp={hp} scrollTo={scrollTo} />
         </div>
       </section>
 
       {/* SKILLS */}
-      <section id="skills" style={{ padding: "120px 60px", background: "#020408", position: "relative" }}>
+      <section id="skills" className="section-pad" style={{ background: "#020408", position: "relative" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgb(255,107,0),transparent)" }} />
         <SectionLabel tag="// WHAT I DO" title="MY" accent="SKILLS" />
-        <div className="skills-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 2 }}>
+        <div className="skills-grid">
           {SKILLS.map((s, i) => <SkillCat key={s.cat} {...s} index={i} />)}
         </div>
       </section>
 
       {/* PROJECTS */}
-      <section id="projects" style={{ padding: "120px 60px", background: "#070d14", position: "relative" }}>
+      <section id="projects" className="section-pad" style={{ background: "#070d14", position: "relative" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgb(0,245,255),transparent)" }} />
         <SectionLabel tag="// WHAT I'VE BUILT" title="MY" accent="PROJECTS" />
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 48 }}>
           {FILTER_CATS.map(cat => <button key={cat} className={`filter-btn${activeFilter === cat ? " active" : ""}`} onClick={() => setActiveFilter(cat)} {...hp}>{cat}</button>)}
         </div>
-        <div className="projects-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(320px,1fr))", gap: 2 }}>
+        <div className="projects-grid">
           {filteredProjects.map((p, i) => <ProjectCard key={p.id} proj={p} index={i} />)}
         </div>
       </section>
 
       {/* CONTACT */}
-      <section id="contact" style={{ padding: "120px 60px", background: "#020408", position: "relative" }}>
+      <section id="contact" className="section-pad" style={{ background: "#020408", position: "relative" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgb(255,107,0),transparent)" }} />
         <ContactSection hp={hp} />
       </section>
 
       {/* FOOTER */}
-      <footer style={{ background: "#020408", borderTop: "1px solid rgba(0,245,255,.06)", padding: "32px 60px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 20 }}>
-        <button onClick={() => scrollTo("home")} {...hp} style={{ fontFamily: "'Orbitron',monospace", fontSize: "1.1rem", fontWeight: 900, letterSpacing: ".15em", background: "none", border: "none", cursor: "none", color: "rgb(0,245,255)", textShadow: "0 0 20px rgba(0,245,255,.6)" }}>P<span style={{ color: "rgb(255,107,0)" }}>.</span>S</button>
+      <footer className="footer-wrap" style={{ background: "#020408", borderTop: "1px solid rgba(0,245,255,.06)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap" }}>
+        <button onClick={() => scrollTo("home")} {...hp} style={{ fontFamily: "'Orbitron',monospace", fontSize: "1.1rem", fontWeight: 900, letterSpacing: ".15em", background: "none", border: "none", cursor: "pointer", color: "rgb(0,245,255)", textShadow: "0 0 20px rgba(0,245,255,.6)" }}>P<span style={{ color: "rgb(255,107,0)" }}>.</span>S</button>
         <span style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: ".65rem", letterSpacing: ".15em", color: "rgba(200,220,240,.18)", display: "inline-flex", alignItems: "center", gap: 4 }}>© 2025 POOCHIT SAKUNTHONG · BUILT WITH {ICONS.bolt(12, "rgba(200,220,240,.18)")}</span>
       </footer>
     </>
@@ -521,7 +610,7 @@ function AboutAvatar() {
   const ref = useRef(null); useReveal(ref, 0);
   return (
     <div ref={ref} className="sec-in" style={{ display: "flex", justifyContent: "center" }}>
-      <div style={{ position: "relative", width: 300, height: 300 }}>
+      <div className="about-avatar-wrap">
         <div style={{ position: "absolute", inset: -20, border: "1px solid rgba(0,245,255,.15)", borderRadius: "50%", animation: "spin 20s linear infinite" }} />
         <div style={{ position: "absolute", inset: -35, border: "1px dashed rgba(255,107,0,.1)", borderRadius: "50%", animation: "spin 30s linear reverse infinite" }} />
         <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: "2px solid rgba(0,245,255,.3)", overflow: "hidden", background: "linear-gradient(135deg,rgba(0,245,255,.06),rgba(255,107,0,.04))" }}>
@@ -545,45 +634,18 @@ function AboutBio({ hp, scrollTo }) {
 
   return (
     <div ref={ref} className="sec-in">
-      {/* INTRO */}
-      <p
-        style={{
-          fontSize: "1.05rem",
-          lineHeight: 1.85,
-          color: "rgba(200,220,240,.65)",
-          marginBottom: 28,
-        }}
-      >
+      <p style={{ fontSize: "1.05rem", lineHeight: 1.85, color: "rgba(200,220,240,.65)", marginBottom: 28 }}>
         สวัสดีครับ! ผมชื่อ{" "}
-        <span style={{ color: "rgb(0,245,255)", fontWeight: 600 }}>
-          Poochit Sakunthong
-        </span>{" "}
+        <span style={{ color: "rgb(0,245,255)", fontWeight: 600 }}>Poochit Sakunthong</span>{" "}
         — Full-stack Developer ที่หลงใหลในการสร้าง Web Application ที่ทั้งใช้งานได้ดีและมีคุณภาพ
       </p>
-
-      {/* EXPERIENCE */}
-      <p
-        style={{
-          fontSize: "1.05rem",
-          lineHeight: 1.85,
-          color: "rgba(200,220,240,.55)",
-          marginBottom: 36,
-        }}
-      >
+      <p style={{ fontSize: "1.05rem", lineHeight: 1.85, color: "rgba(200,220,240,.55)", marginBottom: 36 }}>
         มีประสบการณ์มากกว่า 2 ปี ครอบคลุมทั้ง Frontend และ Backend
         รวมถึงสามารถทำ End-to-End Testing เพื่อให้มั่นใจว่าระบบทำงานได้จริงในทุกขั้นตอน
         ผมชอบการแก้ปัญหา และเรียนรู้สิ่งใหม่ๆ อยู่เสมอ (Learn by Doing)
       </p>
 
-      {/* INFO GRID */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "12px 32px",
-          marginBottom: 36,
-        }}
-      >
+      <div className="about-info-grid" style={{ marginBottom: 36 }}>
         {[
           { k: "Location", v: "Bangkok, Thailand" },
           { k: "Email", v: "poochit.sak@email.com" },
@@ -591,87 +653,19 @@ function AboutBio({ hp, scrollTo }) {
           { k: "Status", v: "Open to work" },
         ].map(({ k, v }) => (
           <div key={k}>
-            <span
-              style={{
-                fontFamily: "'Share Tech Mono',monospace",
-                fontSize: ".62rem",
-                letterSpacing: ".15em",
-                color: "rgba(0,245,255,.5)",
-                textTransform: "uppercase",
-              }}
-            >
-              {k}
-            </span>
-            <div
-              style={{
-                fontFamily: "'Rajdhani',sans-serif",
-                fontSize: ".95rem",
-                fontWeight: 600,
-                color: "rgba(200,220,240,.8)",
-                marginTop: 2,
-              }}
-            >
-              {v}
-            </div>
+            <span style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: ".62rem", letterSpacing: ".15em", color: "rgba(0,245,255,.5)", textTransform: "uppercase" }}>{k}</span>
+            <div style={{ fontFamily: "'Rajdhani',sans-serif", fontSize: ".95rem", fontWeight: 600, color: "rgba(200,220,240,.8)", marginTop: 2 }}>{v}</div>
           </div>
         ))}
       </div>
 
-      {/* BUTTONS */}
-      <div style={{ display: "flex", gap: 12 }}>
-        <button
-          onClick={() => scrollTo("contact")}
-          className="bp"
-          {...hp}
-          style={{
-            position: "relative",
-            fontFamily: "'Orbitron',monospace",
-            fontSize: ".72rem",
-            fontWeight: 700,
-            letterSpacing: ".12em",
-            textTransform: "uppercase",
-            padding: "12px 28px",
-            background:
-              "linear-gradient(135deg,rgb(0,245,255),rgb(0,144,255))",
-            color: "#020408",
-            border: "none",
-            cursor: "none",
-            clipPath:
-              "polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)",
-            transition: "all .3s",
-            overflow: "hidden",
-          }}
-        >
-          LET'S TALK
-        </button>
-
-        <a
-          href="#"
-          className="bs"
-          {...hp}
-          style={{
-            fontFamily: "'Orbitron',monospace",
-            fontSize: ".72rem",
-            fontWeight: 700,
-            letterSpacing: ".12em",
-            textTransform: "uppercase",
-            padding: "11px 26px",
-            border: "1px solid rgba(255,107,0,.5)",
-            color: "rgb(255,107,0)",
-            textDecoration: "none",
-            clipPath:
-              "polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)",
-            transition: "all .3s",
-            background: "rgba(255,107,0,.05)",
-          }}
-        >
-          RESUME ↓
-        </a>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        <button onClick={() => scrollTo("contact")} className="bp" {...hp} style={{ position: "relative", fontFamily: "'Orbitron',monospace", fontSize: ".72rem", fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", padding: "12px 28px", background: "linear-gradient(135deg,rgb(0,245,255),rgb(0,144,255))", color: "#020408", border: "none", cursor: "pointer", clipPath: "polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)", transition: "all .3s", overflow: "hidden" }}>LET'S TALK</button>
+        <a href="#" className="bs" {...hp} style={{ fontFamily: "'Orbitron',monospace", fontSize: ".72rem", fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", padding: "11px 26px", border: "1px solid rgba(255,107,0,.5)", color: "rgb(255,107,0)", textDecoration: "none", clipPath: "polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)", transition: "all .3s", background: "rgba(255,107,0,.05)" }}>RESUME ↓</a>
       </div>
     </div>
   );
 }
-
 
 // ─── CONTACT ──────────────────────────────────────────────────────────────────
 function ContactSection({ hp }) {
@@ -680,10 +674,10 @@ function ContactSection({ hp }) {
   return (
     <div ref={ref} className="sec-in">
       <div style={{ marginBottom: 60 }}>
-        <div style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: ".72rem", letterSpacing: ".3em", textTransform: "uppercase", color: "rgb(0,245,255)", marginBottom: 10, opacity: .8 }}>// GET IN TOUCH</div>
-        <h2 style={{ fontFamily: "'Orbitron',monospace", fontSize: "clamp(1.8rem,4vw,2.8rem)", fontWeight: 900, textTransform: "uppercase", color: "#fff", letterSpacing: ".04em" }}>LET'S <span style={{ color: "rgb(255,107,0)" }}>CONNECT</span></h2>
+        <div className="section-tag">// GET IN TOUCH</div>
+        <h2 style={{ fontFamily: "'Orbitron',monospace", fontSize: "clamp(1.6rem,4vw,2.8rem)", fontWeight: 900, textTransform: "uppercase", color: "#fff", letterSpacing: ".04em" }}>LET'S <span style={{ color: "rgb(255,107,0)" }}>CONNECT</span></h2>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "start" }}>
+      <div className="contact-grid">
         <div>
           <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "rgba(200,220,240,.55)", marginBottom: 40 }}>ถ้าคุณมีโปรเจกต์ที่น่าสนใจ หรืออยากร่วมงานด้วย — ยินดีรับฟังเสมอครับ อย่าลังเลที่จะทักมา!</p>
           {[
@@ -692,12 +686,12 @@ function ContactSection({ hp }) {
             { iconKey: "github", label: "GitHub", val: "github.com/AtomSakChongun" },
           ].map(({ iconKey, label, val }) => (
             <div key={label} style={{ display: "flex", alignItems: "center", gap: 16, padding: "16px 0", borderBottom: "1px solid rgba(0,245,255,.06)" }}>
-              <span style={{ width: 32, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ width: 32, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 {ICONS[iconKey](22, "rgb(0,245,255)")}
               </span>
               <div>
                 <div style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: ".6rem", letterSpacing: ".15em", color: "rgba(0,245,255,.5)", marginBottom: 2 }}>{label}</div>
-                <div style={{ fontFamily: "'Rajdhani',sans-serif", fontWeight: 600, color: "rgba(200,220,240,.75)" }}>{val}</div>
+                <div style={{ fontFamily: "'Rajdhani',sans-serif", fontWeight: 600, color: "rgba(200,220,240,.75)", wordBreak: "break-all" }}>{val}</div>
               </div>
             </div>
           ))}
@@ -706,7 +700,7 @@ function ContactSection({ hp }) {
           <input className="inp" placeholder="ชื่อ / Name" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
           <input className="inp" placeholder="อีเมล / Email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
           <textarea className="inp" rows={5} placeholder="ข้อความ / Message..." value={form.msg} onChange={e => setForm(f => ({ ...f, msg: e.target.value }))} style={{ resize: "vertical" }} />
-          <button className="bp" {...hp} style={{ position: "relative", fontFamily: "'Orbitron',monospace", fontSize: ".75rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", padding: "15px", background: "linear-gradient(135deg,rgb(0,245,255),rgb(0,144,255))", color: "#020408", border: "none", cursor: "none", clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)", transition: "all .3s", overflow: "hidden", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+          <button className="bp" {...hp} style={{ position: "relative", fontFamily: "'Orbitron',monospace", fontSize: ".75rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", padding: "15px", background: "linear-gradient(135deg,rgb(0,245,255),rgb(0,144,255))", color: "#020408", border: "none", cursor: "pointer", clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)", transition: "all .3s", overflow: "hidden", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
             {ICONS.bolt(14, "#020408")} ส่งข้อความ
           </button>
         </div>
