@@ -529,7 +529,6 @@ export default function PoochitPortfolio() {
           </div>
           <h1 className="ht" style={{ fontFamily: "'Orbitron',monospace", fontWeight: 900, lineHeight: .92, letterSpacing: "-.02em", textTransform: "uppercase", marginBottom: 24 }}>
             <span style={{ display: "block", color: "#fff", textShadow: "0 0 60px rgba(255,255,255,.2)", fontSize: "clamp(1.1rem,3.5vw,2.8rem)", letterSpacing: ".05em", fontWeight: 400, marginBottom: 6 }}>Hello, I'm</span>
-            <span className="hero-name" style={{ display: "block", color: "#fff", textShadow: "0 0 60px rgba(255,255,255,.25)", fontSize: "clamp(2rem,7.5vw,6rem)" }}>Poochit Sakunthong</span>
             <span style={{ display: "block", background: "linear-gradient(90deg,rgb(0,245,255) 0%,rgb(64,224,255) 40%,rgb(255,107,0) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", filter: "drop-shadow(0 0 25px rgba(0,245,255,.5))", fontSize: "clamp(2rem,7.5vw,6rem)" }}>
               <span className="gw" data-text="Poochit Sakunthong">Poochit Sakunthong</span>
             </span>
