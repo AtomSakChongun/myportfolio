@@ -3,6 +3,7 @@ import youtube3 from '../assets/images/3.png'
 import youtube1 from '../assets/images/1.png'
 import youtube2 from '../assets/images/2.png'
 import kios from '../assets/images/kios.png'
+import dnd  from '../assets/images/dnd.png'
 import reactIcon from '../assets/icon/react.png'
 import { FaReact, FaNodeJs, FaPython, FaDocker, FaYoutube } from "react-icons/fa";
 
@@ -14,8 +15,8 @@ import { HiLightningBolt } from "react-icons/hi";
 const CYAN = "0,245,255";
 const ORANGE = "255,107,0";
 
-const Icon = ({ Component, size = 20, color = "rgb(0,245,255)" }) => (
-  <Component size={size} color={color} style={{ display: "inline-block", verticalAlign: "middle" }} />
+const Icon = ({ Component: IconComponent, size = 20, color = "rgb(0,245,255)" }) => (
+  <IconComponent size={size} color={color} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
 
 const ICONS = {
@@ -126,9 +127,10 @@ const PROJECTS = [
   { id: "061", title: "LeetCode Two Sum", category: "Youtube", tags: ["Python"], desc: "โจทย์ยอดฮิตจาก LeetCode ที่ให้หาคู่ตัวเลขใน array ที่มีผลรวมเท่ากับ target โดยเน้นการใช้เทคนิค Hash Map เพื่อเพิ่มประสิทธิภาพในการค้นหา", status: "ARCHIVE", color: ORANGE, img: youtube1, link: "https://youtu.be/w5bQCtVhwyU?si=IRspVjtw8zeLJzSw" },
   { id: "062", title: "Add Two Numbers", category: "Youtube", tags: ["Python"], desc: "สอนแก้โจทย์บวกเลขสองจำนวนที่อยู่ในรูปแบบ Linked List โดยต้องจัดการการทดเลข (carry) ทีละหลักอย่างถูกต้อง", status: "ARCHIVE", color: ORANGE, img: youtube2, link: "https://youtu.be/GDPLmPEXSqg?si=9aW35-7alCUNty37" },
   { id: "063", title: "Longest Substring Without Repeating Characters", category: "Youtube", tags: ["Python"], desc: "สอนแก้โจทย์หาความยาว substring ที่ไม่มีตัวอักษรซ้ำ โดยใช้เทคนิค Sliding Window เพื่อให้ได้ประสิทธิภาพ O(n)", status: "ARCHIVE", color: ORANGE, img: youtube3, link: "https://youtu.be/DSN9rgC4990?si=97CNG0VkRXMBvIYp" },
+   { id: "064", title: "DND Party Finder", category: "Mini Project", tags: ["Next.js", "Supabase"], desc: "เว็บไซต์สำหรับค้นหากลุ่มผู้เล่น D&D สำหรับผู้เล่นที่ต้องการค้นหาและเชิญชวนเพื่อนร่วมเล่นเกม D&D ทั้ง Onsite และ Online รวมถึงระบบ Review ผู้เล่น", status: "ARCHIVE", color: ORANGE, img: dnd, link: "https://dnd-partyfinder.vercel.app/" },
 ];
 
-const FILTER_CATS = ["ALL", "Intern Project", "Youtube"];
+const FILTER_CATS = ["ALL", "Intern Project", "Youtube","Mini Project"];
 
 function makeDefaultSVG(proj) {
   const c = proj.color;
